@@ -21,10 +21,12 @@ class WechatServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(WxappManager::class, function () {
+        $this->app->singleton(WxappManager::class, function (&$app) {
+            $config = $app->make('config')->get('cache');
+            var_dump($config);
             return new WxappManager();
         });
-        $this->app->singleton(WechatManager::class, function () {
+        $this->app->singleton(WechatManager::class, function (&$app) {
             return new WechatManager();
         });
     }
