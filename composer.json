@@ -1,0 +1,27 @@
+{
+    "name": "luoyy/laravel-wechat-sdk",
+    "description": "the wechat api library without framework dependency",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "authors": [{
+        "name": "luoyy",
+        "email": "zishang520@gmail.com"
+    }, {
+        "name": "binsee",
+        "email": "binsee@163.com"
+    }],
+    "keywords": ["wechat", "weixin", "thinkphp", "sample"],
+    "support": {
+        "issues": "https://github.com/zishang520/laravel-wechat-sdk/issues",
+        "wiki": "https://github.com/zishang520/laravel-wechat-sdk/wiki",
+        "source": "https://github.com/zishang520/laravel-wechat-sdk"
+    },
+    "autoload": {
+        "psr-4": {
+            "luoyy\\Wechat\\": "src/"
+        }
+    },
+    "type": "library",
+    "license": "LGPL"
+}
