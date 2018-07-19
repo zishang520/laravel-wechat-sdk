@@ -219,23 +219,23 @@ class Wechat
     const MERCHANT_ORDER_SETDELIVERY = '/merchant/order/setdelivery?'; //设置订单发货信息
     const MERCHANT_ORDER_CLOSE = '/merchant/order/close?'; //关闭订单
 
-    private $token;
-    private $encodingAesKey;
-    private $encrypt_type;
-    private $appid;
-    private $appsecret;
-    private $access_token;
-    private $jsapi_ticket;
-    private $api_ticket;
-    private $user_token;
-    private $partnerid;
-    private $partnerkey;
-    private $paysignkey;
-    private $postxml;
-    private $_msg;
-    private $_funcflag = false;
-    private $_receive;
-    private $_text_filter = true;
+    protected $token;
+    protected $encodingAesKey;
+    protected $encrypt_type;
+    protected $appid;
+    protected $appsecret;
+    protected $access_token;
+    protected $jsapi_ticket;
+    protected $api_ticket;
+    protected $user_token;
+    protected $partnerid;
+    protected $partnerkey;
+    protected $paysignkey;
+    protected $postxml;
+    protected $_msg;
+    protected $_funcflag = false;
+    protected $_receive;
+    protected $_text_filter = true;
     public $debug = false;
     public $errCode = 40001;
     public $errMsg = "no access";
@@ -254,7 +254,7 @@ class Wechat
     /**
      * For weixin server validation
      */
-    private function checkSignature($str = '')
+    protected function checkSignature($str = '')
     {
         $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';
         $signature = isset($_GET["msg_signature"]) ? $_GET["msg_signature"] : $signature; //如果存在加密验证则用加密验证段
@@ -302,7 +302,7 @@ class Wechat
                 if (!$this->appid) {
                     $this->appid = $array[2];
                 }
-            // 为了没有appid的订阅号。
+                // 为了没有appid的订阅号。
             } else {
                 $this->postxml = $postStr;
             }
@@ -1017,7 +1017,7 @@ class Wechat
      * @param string $text
      * @return string|mixed
      */
-    private function _auto_text_filter($text)
+    protected function _auto_text_filter($text)
     {
         if (!$this->_text_filter) {
             return $text;
@@ -1221,7 +1221,7 @@ class Wechat
     /**
      * xml格式加密，仅请求为加密方式时再用
      */
-    private function generate($encrypt, $signature, $timestamp, $nonce)
+    protected function generate($encrypt, $signature, $timestamp, $nonce)
     {
         //格式化加密信息
         $format = "<xml>
@@ -1237,7 +1237,7 @@ class Wechat
      * GET 请求
      * @param string $url
      */
-    private function http_get($url)
+    protected function http_get($url)
     {
         $oCurl = curl_init();
         if (stripos($url, "https://") !== false) {
@@ -1264,7 +1264,7 @@ class Wechat
      * @param boolean $post_file 是否文件上传
      * @return string content
      */
-    private function http_post($url, $param, $post_file = false)
+    protected function http_post($url, $param, $post_file = false)
     {
         $oCurl = curl_init();
         if (stripos($url, "https://") !== false) {
@@ -5152,7 +5152,7 @@ class Wechat
         return false;
     }
 
-    private function parseSkuInfo($skuInfo)
+    protected function parseSkuInfo($skuInfo)
     {
         $skuInfo = str_replace("\$", "", $skuInfo);
         $matches = explode(";", $skuInfo);
