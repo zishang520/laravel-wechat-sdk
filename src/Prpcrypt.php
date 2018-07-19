@@ -14,15 +14,7 @@ class Prpcrypt
 
     public function __construct($k)
     {
-        $this->key = base64_decode($k . "=");
-    }
-
-    /**
-     * 兼容老版本php构造函数，不能在 __construct() 方法前边，否则报错
-     */
-    public function Prpcrypt($k)
-    {
-        $this->key = base64_decode($k . "=");
+        $this->key = base64_decode(str_pad($k, strlen($k) % 4, '=', STR_PAD_RIGHT));
     }
 
     /**

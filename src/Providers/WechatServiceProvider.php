@@ -3,7 +3,6 @@ namespace luoyy\Wechat\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use luoyy\Wechat\WechatManager;
-use luoyy\Wechat\WxappManager;
 
 class WechatServiceProvider extends ServiceProvider
 {
@@ -21,13 +20,11 @@ class WechatServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(WxappManager::class, function (&$app) {
-            $config = $app->make('config')->get('cache');
-            var_dump($config);
-            return new WxappManager();
-        });
-        $this->app->singleton(WechatManager::class, function (&$app) {
-            return new WechatManager();
+        $this->app->singleton(WechatManager::class, function ($app) {
+            // 载入配置
+            $app->configure('wechat');
+            $config = $app->make('config')->get('wechat') ?: (require __DIR__ . '/../config/wechat.php');
+            return new WechatManager($config);
         });
     }
     /**
@@ -38,7 +35,6 @@ class WechatServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            WxappManager::class,
             WechatManager::class
         ];
     }
