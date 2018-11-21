@@ -2918,13 +2918,11 @@ class Wechat
      * 通过code获取Access Token
      * @return array {access_token,expires_in,refresh_token,openid,scope}
      */
-    public function getOauthAccessToken()
+    public function getOauthAccessToken($code = '')
     {
-        $code = isset($_GET['code']) ? $_GET['code'] : '';
-        if (!$code) {
+        if (empty($code)) {
             return false;
         }
-
         $result = $this->http_get(self::API_BASE_URL_PREFIX . self::OAUTH_TOKEN_URL . 'appid=' . $this->appid . '&secret=' . $this->appsecret . '&code=' . $code . '&grant_type=authorization_code');
         if ($result) {
             $json = json_decode($result, true);
@@ -2967,8 +2965,9 @@ class Wechat
      * @return array {openid,nickname,sex,province,city,country,headimgurl,privilege,[unionid]}
      * 注意：unionid字段 只有在用户将公众号绑定到微信开放平台账号后，才会出现。建议调用前用isset()检测一下
      */
-    public function getOauthUserinfo($access_token, $openid)
+    public function getOauthUserinfo($openid, $access_token = '')
     {
+        $access_token = empty($access_token) ? $this->user_token : $access_token;
         $result = $this->http_get(self::API_BASE_URL_PREFIX . self::OAUTH_USERINFO_URL . 'access_token=' . $access_token . '&openid=' . $openid);
         if ($result) {
             $json = json_decode($result, true);
@@ -2988,8 +2987,9 @@ class Wechat
      * @param string $openid
      * @return boolean 是否有效
      */
-    public function getOauthAuth($access_token, $openid)
+    public function getOauthAuth($openid, $access_token = '')
     {
+        $access_token = empty($access_token) ? $this->user_token : $access_token;
         $result = $this->http_get(self::API_BASE_URL_PREFIX . self::OAUTH_AUTH_URL . 'access_token=' . $access_token . '&openid=' . $openid);
         if ($result) {
             $json = json_decode($result, true);
