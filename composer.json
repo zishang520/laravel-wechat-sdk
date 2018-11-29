@@ -18,5 +18,15 @@
         "psr-4": {
             "luoyy\\Wechat\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "Wechat": " luoyy\\Wechat\\Facades\\Wechat",
+            },
+            "providers": [
+                "luoyy\\Wechat\\Providers\\WechatServiceProvider"
+            ]
+        }
     }
 }
