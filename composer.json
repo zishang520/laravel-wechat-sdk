@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "aliases": {
-                "Wechat": " luoyy\\Wechat\\Facades\\Wechat",
+                "Wechat": " luoyy\\Wechat\\Facades\\Wechat"
             },
             "providers": [
                 "luoyy\\Wechat\\Providers\\WechatServiceProvider"
