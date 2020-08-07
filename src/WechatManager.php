@@ -1,6 +1,7 @@
 <?php
 namespace luoyy\Wechat;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use luoyy\Wechat\ErrCode;
@@ -321,6 +322,6 @@ class WechatManager extends Wechat
 
     public function getError()
     {
-        return ['errCode' => $this->errCode, 'errMsg' => $this->errMsg, 'errText' => ErrCode::getErrText($this->errCode)];
+        return Arr::get(['errCode' => $this->errCode, 'errMsg' => $this->errMsg, 'errText' => ErrCode::getErrText($this->errCode)], $key);
     }
 }
