@@ -320,8 +320,9 @@ class WechatManager extends Wechat
         return Cache::forget($cachename);
     }
 
-    public function getError()
+    public function getError($key = null)
     {
-        return Arr::get(['errCode' => $this->errCode, 'errMsg' => $this->errMsg, 'errText' => ErrCode::getErrText($this->errCode)], $key);
+        $err = ['errCode' => $this->errCode, 'errMsg' => $this->errMsg, 'errText' => ErrCode::getErrText($this->errCode)];
+        return is_null($key) ? $err : Arr::get($err, $key);
     }
 }
